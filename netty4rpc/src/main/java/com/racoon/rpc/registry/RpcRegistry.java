@@ -43,6 +43,7 @@ public class RpcRegistry {
                             //对象参数类型编码器
                             pipeline.addLast("encoder", new ObjectEncoder());
                             pipeline.addLast("decoder",new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.cacheDisabled(null)));
+                            //进行消息处理并发送消息回去
                             pipeline.addLast(new RegistryHandler());
                         }
                     })

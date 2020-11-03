@@ -22,8 +22,11 @@ public class RpcProxy {
     public static <T> T create(Class<?> clazz){
         //clazz传进来本身就是interface
         MethodProxy proxy = new MethodProxy(clazz);
+
         Class<?>[] interfaces = clazz.isInterface() ? new Class[]{clazz} : clazz.getInterfaces();
+
         T result = (T) Proxy.newProxyInstance(clazz.getClassLoader(), interfaces, proxy);
+
         return result;
     }
     private static class MethodProxy implements InvocationHandler{
@@ -31,6 +34,7 @@ public class RpcProxy {
         public MethodProxy(Class<?> clazz){
             this.clazz = clazz;
         }
+        //在调用方法的时候才会调用这个invoke函数
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
             //如果传进来的是一个已经实现的具体类（本次演示略过）
             if(Object.class.equals(method.getDeclaringClass())){
@@ -95,7 +99,8 @@ public class RpcProxy {
             }finally {
                 group.shutdownGracefully();
             }
-            return consumerHandler.getResponse();
+            Object temp = consumerHandler.getResponse();
+            return temp;
         }
 
     }
