@@ -13,6 +13,10 @@ import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class RpcRegistry {
     private int port;
     public RpcRegistry(int port){
@@ -59,6 +63,7 @@ public class RpcRegistry {
     }
 
     public static void main(String[] args) {
+        ExecutorService executorService = Executors.newCachedThreadPool();
         new RpcRegistry(8080).start();
     }
 }

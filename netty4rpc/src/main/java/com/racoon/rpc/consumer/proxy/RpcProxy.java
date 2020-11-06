@@ -56,6 +56,7 @@ public class RpcProxy {
          * @param args
          * @return
          */
+
         private Object rpcInvoke(Object proxy, Method method, Object[] args) {
             //传输协议封装
             InvokerProtocol msg = new InvokerProtocol();

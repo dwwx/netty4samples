@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/demo-agent-01/demo-agent-01.iml" filepath="$PROJECT_DIR$/demo-agent-01/demo-agent-01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/netty-learn-demo/netty-learn-demo.iml" filepath="$PROJECT_DIR$/netty-learn-demo/netty-learn-demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/netty4rpc/netty4rpc.iml" filepath="$PROJECT_DIR$/netty4rpc/netty4rpc.iml" />
       <module fileurl="file://$PROJECT_DIR$/netty4tomcat/netty4tomcat.iml" filepath="$PROJECT_DIR$/netty4tomcat/netty4tomcat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring2/spring2.iml" filepath="$PROJECT_DIR$/spring2/spring2.iml" />
     </modules>
   </component>
 </project>

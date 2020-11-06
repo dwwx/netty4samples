@@ -7,12 +7,18 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="netty4rpc" />
+        <module name="netty-learn-demo" />
+        <module name="spring2" />
         <module name="netty4tomcat" />
+        <module name="demo-agent-01" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="demo-agent-01" target="1.5" />
+      <module name="netty-learn-demo" target="6" />
       <module name="netty4rpc" target="1.5" />
       <module name="netty4tomcat" target="1.5" />
+      <module name="spring2" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
