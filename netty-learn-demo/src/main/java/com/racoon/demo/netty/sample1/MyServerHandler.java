@@ -26,13 +26,17 @@ public class MyServerHandler extends ChannelInboundHandlerAdapter {
         System.out.println("链接报告完毕");
 
         //通知客户端建立连接成功,再通过服务端添加编码器,就省略了自己封装的一个过程，反馈客户端
-        String str = "通知客户端建立连接成功"+new Date()+ch.localAddress().getHostName()+"\r\n";
+        //String str = "通知客户端建立连接成功"+new Date()+ch.localAddress().getHostName()+"\r\n";
 //        ByteBuf buf = Unpooled.buffer(str.getBytes().length);
 //        buf.writeBytes(str.getBytes("GBK"));
 //        ctx.writeAndFlush(buf);
+        String str = "hi i'm ok";
         ctx.writeAndFlush(str);
     }
 
+    /**
+     * 当客户端主动断开服务端的链接后，这个通道就是不活跃的。也就是说客户端与服务端的关闭了通信通道并且不可以传输数据
+     */
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         System.out.println("客户端断开连接"+ctx.channel().localAddress().toString());
@@ -57,9 +61,10 @@ public class MyServerHandler extends ChannelInboundHandlerAdapter {
 //        System.out.println(new String(msgByte, Charset.forName("GBK")));
        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+" 接收到消息："+msg);
        //给客户端回消息
-        String string = "服务单收到你发的消息"+msg+"\r\n";
+        //String string = "服务单收到你发的消息"+msg+"\r\n";
 //        ctx.writeAndFlush(string);
         //进行一个群发消息
+        String string = "hi i'm ok";
         ChannelHandler.channelGroup.writeAndFlush(string);
     }
 }

@@ -1,5 +1,7 @@
 package com.racoon.demo.netty.sample1;
 
+import com.racoon.demo.netty.codec.MyDecoder;
+import com.racoon.demo.netty.codec.MyEncoder;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.*;
@@ -18,18 +20,22 @@ public class MyChannelInitializer extends ChannelInitializer<SocketChannel> {
     //DelimiterBasedFrameDecoder 基于指定字符串
     //FixedLengthFrameDecoder 基于字符串长度
     protected void initChannel(SocketChannel ch) throws Exception {
-        //在Channel的初始化的时候进行Handler的添加
-        //基于换行符的，LineBasedFrameDecoder。在使用网络调试助手发消息时，必须在消息后加一个\n换行符
-        ch.pipeline().addLast(new LineBasedFrameDecoder(1024));
-        //基于指定字符的
-        //ch.pipeline().addLast(new DelimiterBasedFrameDecoder(1024,false, Delimiters.lineDelimiter()));
-        //基于最大长度的
-        //ch.pipeline().addLast(new FixedLengthFrameDecoder(4));
-        //网络调试助手使用的是GBK编码，对客户端发过来的消息进行解码
-        ch.pipeline().addLast(new StringDecoder(Charset.forName("GBK")));
-        //增加自己的编码格式，这里再转换成自己的编码
-        ch.pipeline().addLast(new StringEncoder(Charset.forName("GBK")));
-        //此时得到的Channel可以拿到，再往pipeline里面增加相应的链路
+//        //在Channel的初始化的时候进行Handler的添加
+//        //基于换行符的，LineBasedFrameDecoder。在使用网络调试助手发消息时，必须在消息后加一个\n换行符
+//        ch.pipeline().addLast(new LineBasedFrameDecoder(1024));
+//        //基于指定字符的
+//        //ch.pipeline().addLast(new DelimiterBasedFrameDecoder(1024,false, Delimiters.lineDelimiter()));
+//        //基于最大长度的
+//        //ch.pipeline().addLast(new FixedLengthFrameDecoder(4));
+//        //网络调试助手使用的是GBK编码，对客户端发过来的消息进行解码
+//        ch.pipeline().addLast(new StringDecoder(Charset.forName("GBK")));
+//        //增加自己的编码格式，这里再转换成自己的编码
+//        ch.pipeline().addLast(new StringEncoder(Charset.forName("GBK")));
+//        //此时得到的Channel可以拿到，再往pipeline里面增加相应的链路
+//        ch.pipeline().addLast(new MyServerHandler());
+        //添加自定义的编码解码器
+        ch.pipeline().addLast(new MyDecoder());
+        ch.pipeline().addLast(new MyEncoder());
         ch.pipeline().addLast(new MyServerHandler());
     }
 }
