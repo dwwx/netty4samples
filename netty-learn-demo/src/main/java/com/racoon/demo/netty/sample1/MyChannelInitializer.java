@@ -13,6 +13,6 @@ public class MyChannelInitializer extends ChannelInitializer<SocketChannel> {
         System.out.println("链接报告Port:" + ch.localAddress().getPort());
         System.out.println("链接报告完毕");
         //此时得到的Channel可以拿到，再往pipeline里面增加相应的链路
-
+        ch.pipeline().addLast(new MyServerHandler());
     }
 }
