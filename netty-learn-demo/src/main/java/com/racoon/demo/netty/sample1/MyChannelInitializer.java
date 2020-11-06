@@ -12,6 +12,11 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 //继承ChannelInitializer的类，对channel的初始化连接做一个监控
+
+/**
+ * 实际上是继承ChannelInboundHandlerAdapter
+ * 可以自己实现自己的InOutBound，通过继承ChannelInboundHandlerAdapter
+ */
 public class MyChannelInitializer extends ChannelInitializer<SocketChannel> {
 
     //netty可以把消息进行转String,还能在网络传输过程中合理处理半包粘包
