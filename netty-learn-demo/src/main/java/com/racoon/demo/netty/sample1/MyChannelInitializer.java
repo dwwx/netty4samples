@@ -24,7 +24,7 @@ public class MyChannelInitializer extends ChannelInitializer<SocketChannel> {
         //ch.pipeline().addLast(new DelimiterBasedFrameDecoder(1024,false, Delimiters.lineDelimiter()));
         //基于最大长度的
         //ch.pipeline().addLast(new FixedLengthFrameDecoder(4));
-
+        //网络调试助手使用的是GBK编码
         ch.pipeline().addLast(new StringDecoder(Charset.forName("GBK")));
         //此时得到的Channel可以拿到，再往pipeline里面增加相应的链路
         ch.pipeline().addLast(new MyServerHandler());

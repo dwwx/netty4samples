@@ -1,6 +1,7 @@
 package com.racoon.demo.netty.sample1;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.socket.SocketChannel;
@@ -21,6 +22,23 @@ public class MyServerHandler extends ChannelInboundHandlerAdapter {
         System.out.println("链接报告IP:" + ch.localAddress().getHostName());
         System.out.println("链接报告Port:" + ch.localAddress().getPort());
         System.out.println("链接报告完毕");
+
+        //通知客户端建立连接成功
+        String str = "通知客户端建立连接成功"+new Date()+ch.localAddress().getHostName()+"\r\n";
+        ByteBuf buf = Unpooled.buffer(str.getBytes().length);
+        buf.writeBytes(str.getBytes("GBK"));
+        ctx.writeAndFlush(buf);
+    }
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("客户端断开连接"+ctx.channel().localAddress().toString());
+    }
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        ctx.close();
+        System.out.println("异常信息 \r\n"+cause.getMessage());
     }
 
     @Override
