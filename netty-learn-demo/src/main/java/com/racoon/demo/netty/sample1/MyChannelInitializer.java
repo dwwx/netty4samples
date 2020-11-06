@@ -4,6 +4,7 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.*;
 import io.netty.handler.codec.string.StringDecoder;
+import io.netty.handler.codec.string.StringEncoder;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -24,8 +25,10 @@ public class MyChannelInitializer extends ChannelInitializer<SocketChannel> {
         //ch.pipeline().addLast(new DelimiterBasedFrameDecoder(1024,false, Delimiters.lineDelimiter()));
         //基于最大长度的
         //ch.pipeline().addLast(new FixedLengthFrameDecoder(4));
-        //网络调试助手使用的是GBK编码
+        //网络调试助手使用的是GBK编码，对客户端发过来的消息进行解码
         ch.pipeline().addLast(new StringDecoder(Charset.forName("GBK")));
+        //增加自己的编码格式，这里再转换成自己的编码
+        ch.pipeline().addLast(new StringEncoder(Charset.forName("GBK")));
         //此时得到的Channel可以拿到，再往pipeline里面增加相应的链路
         ch.pipeline().addLast(new MyServerHandler());
     }

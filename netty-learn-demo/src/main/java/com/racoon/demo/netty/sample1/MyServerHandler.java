@@ -23,11 +23,12 @@ public class MyServerHandler extends ChannelInboundHandlerAdapter {
         System.out.println("链接报告Port:" + ch.localAddress().getPort());
         System.out.println("链接报告完毕");
 
-        //通知客户端建立连接成功
+        //通知客户端建立连接成功,再通过服务端添加编码器,就省略了自己封装的一个过程
         String str = "通知客户端建立连接成功"+new Date()+ch.localAddress().getHostName()+"\r\n";
-        ByteBuf buf = Unpooled.buffer(str.getBytes().length);
-        buf.writeBytes(str.getBytes("GBK"));
-        ctx.writeAndFlush(buf);
+//        ByteBuf buf = Unpooled.buffer(str.getBytes().length);
+//        buf.writeBytes(str.getBytes("GBK"));
+//        ctx.writeAndFlush(buf);
+        ctx.writeAndFlush(str);
     }
 
     @Override
@@ -51,5 +52,8 @@ public class MyServerHandler extends ChannelInboundHandlerAdapter {
 //        System.out.print(new Date() + "接收到消息:");
 //        System.out.println(new String(msgByte, Charset.forName("GBK")));
        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+" 接收到消息："+msg);
+       //给客户端回消息
+        String string = "服务单收到你发的消息"+msg+"\r\n";
+        ctx.writeAndFlush(string);
     }
 }
