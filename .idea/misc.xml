@@ -8,6 +8,7 @@
         <option value="$PROJECT_DIR$/spring2/pom.xml" />
         <option value="$PROJECT_DIR$/demo-agent-01/pom.xml" />
         <option value="$PROJECT_DIR$/netty-learn-demo/pom.xml" />
+        <option value="$PROJECT_DIR$/netty-springboot-demo/pom.xml" />
       </list>
     </option>
   </component>
