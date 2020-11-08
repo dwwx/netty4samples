@@ -16,13 +16,13 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
-      <module name="demo-agent-01" target="1.5" />
-      <module name="netty-learn-demo" target="6" />
-      <module name="netty-springboot-demo" target="1.8" />
-      <module name="netty4rpc" target="1.5" />
-      <module name="netty4tomcat" target="1.5" />
-      <module name="racoon-chat-ui" target="1.8" />
-      <module name="spring2" target="1.5" />
+      <module name="demo-agent-01" target="8" />
+      <module name="netty-learn-demo" target="8" />
+      <module name="netty-springboot-demo" target="8" />
+      <module name="netty4rpc" target="8" />
+      <module name="netty4tomcat" target="8" />
+      <module name="racoon-chat-ui" target="8" />
+      <module name="spring2" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>
