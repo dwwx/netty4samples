@@ -16,6 +16,7 @@ import java.io.IOException;
 
 /**
  * 请体会是怎么用逻辑来控制前后端的
+ * 这样写代码的话，感觉逻辑就很简单，但是没有用到编程的思想
  */
 
 public class Login extends Stage {
@@ -39,7 +40,7 @@ public class Login extends Stage {
         //初始化相关的事件
         initEvent();
     }
-    //后台根据id获取前端的值
+    //后台根据id获取前端的值 root需要好好看看源码，看其是怎样实现领域驱动的
     public <T> T $(String id, Class<?> clazz){
         return (T)root.lookup('#'+id);
     }
