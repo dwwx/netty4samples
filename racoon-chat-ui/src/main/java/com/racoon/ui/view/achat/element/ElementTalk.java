@@ -4,10 +4,12 @@ import com.racoon.ui.util.DateUtil;
 import com.racoon.ui.util.Ids;
 import com.racoon.ui.view.achat.data.RemindCount;
 import com.racoon.ui.view.achat.data.TalkBoxData;
+import com.racoon.ui.view.achat.data.TalkData;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 import java.util.Date;
 
@@ -20,6 +22,8 @@ public class ElementTalk {
     private Label msgData;   // 信息时间
     private Label msgRemind; // 消息提醒
     private Button delete;   // 删除对话框按钮
+
+    private ListView<Pane> infoBoxList; // 初始化填充消息对话框
 
     public ElementTalk(String talkId, Integer talkType, String talkName, String talkHead, String talkSketch, Date talkDate) {
         pane = new Pane();
@@ -87,6 +91,13 @@ public class ElementTalk {
         delete.getStyleClass().add("element_delete");
         children.add(delete);
 
+        // 消息框[初始化，未装载]，承载对话信息内容，点击按钮时候填充
+        infoBoxList = new ListView<>();
+        infoBoxList.setId(Ids.ElementTalkId.createInfoBoxListId(talkId));
+        infoBoxList.setUserData(new TalkData(talkName, talkHead));
+        infoBoxList.setPrefSize(850, 560);
+        infoBoxList.getStyleClass().add("infoBoxStyle");
+
     }
 
     public Pane pane() {
@@ -107,7 +118,9 @@ public class ElementTalk {
         String talkSimpleDate = DateUtil.simpleDate(talkDate);
         msgData.setText(talkSimpleDate);
     }
-
+    public ListView<Pane> infoBoxList() {
+        return infoBoxList;
+    }
     public void clearMsgSketch() {
         msgSketch.setText("");
     }
@@ -115,4 +128,6 @@ public class ElementTalk {
     public Label msgRemind() {
         return msgRemind;
     }
+
+
 }
