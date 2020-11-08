@@ -66,4 +66,32 @@ public interface IChatMethod {
      * @param isRemind 是否提醒
      */
     void addTalkMsgRight(String talkId, String msg, Date msgData, Boolean idxFirst, Boolean selected, Boolean isRemind);
+    /**
+     * 好友列表添加‘群组’
+     *
+     * @param groupId   群组ID
+     * @param groupName 群组名称
+     * @param groupHead 群组头像
+     */
+    void addFriendGroup(String groupId, String groupName, String groupHead);
+
+    /**
+     * 好友列表添加‘用户’
+     *
+     * @param selected     选中;true/false
+     * @param userId       好友ID
+     * @param userNickName 好友昵称
+     * @param userHead     好友头像
+     */
+    void addFriendUser(boolean selected, String userId, String userNickName, String userHead);
+
+    /**
+     * 缘分好友 | 默认添加10个好友
+     *
+     * @param userId       好友ID
+     * @param userNickName 好友昵称
+     * @param userHead     好友头像
+     * @param status       状态；0添加、1允许、2已添加
+     */
+    void addLuckFriend(String userId, String userNickName, String userHead, Integer status);
 }

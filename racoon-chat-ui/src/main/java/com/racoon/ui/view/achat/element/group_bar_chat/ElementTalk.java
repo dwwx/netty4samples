@@ -1,4 +1,4 @@
-package com.racoon.ui.view.achat.element;
+package com.racoon.ui.view.achat.element.group_bar_chat;
 
 import com.racoon.ui.util.DateUtil;
 import com.racoon.ui.util.Ids;

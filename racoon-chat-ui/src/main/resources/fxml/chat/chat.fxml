@@ -90,7 +90,45 @@
     </Pane>
 
     <!-- 组；group_bar_friend -->
-    <Pane visible="false" id="group_bar_friend" layoutX="76" layoutY="1" prefWidth="1166" prefHeight="818" style="-fx-background-color:yellow;">
+    <Pane visible="false" id="group_bar_friend" layoutX="76" layoutY="1" prefWidth="1166" prefHeight="818">
+        <children>
+            <!-- 操作栏；最小化、关闭 -->
+            <Pane id="operation" layoutX="314" prefWidth="852" prefHeight="32">
+                <children>
+                    <Button id="group_bar_friend_min" styleClass="min" layoutX="767" prefWidth="42" prefHeight="32"/>
+                    <Button id="group_bar_friend_close" styleClass="close" layoutX="810" prefWidth="42" prefHeight="32"/>
+                </children>
+            </Pane>
+            <!-- 搜索栏 -->
+            <Pane styleClass="search" prefHeight="80" prefWidth="314">
+                <children>
+                    <TextField styleClass="searchInput" layoutX="20" layoutY="30" prefHeight="30" prefWidth="240" promptText="搜索">
+                        <padding>
+                            <Insets left="30"/>
+                        </padding>
+                    </TextField>
+                    <Label styleClass="searchAdd" layoutX="270" layoutY="30" prefHeight="30" prefWidth="30"/>
+                </children>
+            </Pane>
+            <!-- 好友栏 -->
+            <Pane id="friend" layoutY="80" prefHeight="738" prefWidth="314">
+                <children>
+                    <ListView id="friendList" prefHeight="738" prefWidth="314" styleClass="friendListStyle"/>
+                </children>
+            </Pane>
+            <!-- 内容栏；新的朋友、公众号、群组、好友，明细信息(发送消息按钮) -->
+            <Pane id="content" layoutX="314" layoutY="32" prefWidth="852" prefHeight="606">
+                <children>
+                    <Pane id="content_pane" prefWidth="852" prefHeight="44">
+                        <children>
+                            <Label id="content_name" layoutX="40" layoutY="-8" prefWidth="400" prefHeight="40"
+                                   text="加载..."/>
+                        </children>
+                    </Pane>
+                    <Pane id="content_pane_box" layoutX="1" layoutY="45" prefWidth="850" prefHeight="560" style="-fx-background-color:transparent;-fx-border-width:0;"/>
+                </children>
+            </Pane>
+        </children>
     </Pane>
 
 </Pane>

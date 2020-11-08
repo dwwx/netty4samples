@@ -1,6 +1,6 @@
 package com.racoon.ui.util;
 
-import com.racoon.ui.view.achat.element.ElementTalk;
+import com.racoon.ui.view.achat.element.group_bar_chat.ElementTalk;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

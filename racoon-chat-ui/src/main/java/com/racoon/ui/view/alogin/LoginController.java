@@ -1,12 +1,16 @@
 package com.racoon.ui.view.alogin;
 
-public class LoginController extends LoginInit implements ILoginMethod{
+import com.racoon.ui.view.achat.IChatEvent;
+import com.racoon.ui.view.achat.IChatMethod;
 
+public class LoginController extends LoginInit implements ILoginMethod{
+    private IChatMethod chat;
     private LoginView loginView;
     private LoginEventDefine loginEventDefine;
 
-    public LoginController(ILoginEvent loginEvent) {
+    public LoginController(ILoginEvent loginEvent, IChatMethod chatMethod) {
         super(loginEvent);
+        this.chat = chatMethod;
     }
 
     @Override
@@ -34,5 +38,6 @@ public class LoginController extends LoginInit implements ILoginMethod{
         System.out.println("登陆成功，执行跳转操作");
         // 关闭原窗口
         close();
+        chat.doShow();
     }
 }
