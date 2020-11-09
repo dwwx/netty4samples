@@ -168,7 +168,7 @@ public class ChatEventDefine {
         // 发送消息
         System.out.println("发送消息：" + msg);
         // 发送事件给自己添加消息
-        chatMethod.addTalkMsgRight(talkBoxData.getTalkId(), msg, msgDate, true, true, false);
+        chatMethod.addTalkMsgRight(talkBoxData.getTalkId(), msg,0, msgDate, true, true, false);
         txt_input.clear();
     }
 }

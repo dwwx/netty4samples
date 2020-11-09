@@ -10,6 +10,8 @@
         <option value="$PROJECT_DIR$/netty-learn-demo/pom.xml" />
         <option value="$PROJECT_DIR$/netty-springboot-demo/pom.xml" />
         <option value="$PROJECT_DIR$/racoon-chat-ui/pom.xml" />
+        <option value="$PROJECT_DIR$/racoon-chat-client/pom.xml" />
+        <option value="$PROJECT_DIR$/racoon-chat-server-aggreement/pom.xml" />
       </list>
     </option>
   </component>

@@ -113,30 +113,9 @@ public class ChatController extends ChatInit implements IChatMethod{
             talkElement.clearMsgSketch();
         });
     }
-    /**
-     * 私有方法
-     * 填充对话框消息内容
-     *
-     * @param talkElement 对话框元素
-     * @param talkName    对话框名称
-     */
-    private void fillInfoBox(ElementTalk talkElement, String talkName) {
-        String talkId = talkElement.pane().getUserData().toString();
-        // 填充对话列表
-        Pane info_pane_box = $("info_pane_box", Pane.class);
-        String boxUserId = (String) info_pane_box.getUserData();
-        // 判断是否已经填充[talkId]，当前已填充则返回
-        if (talkId.equals(boxUserId)) return;
-        ListView<Pane> listView = talkElement.infoBoxList();
-        info_pane_box.setUserData(talkId);
-        info_pane_box.getChildren().clear();
-        info_pane_box.getChildren().add(listView);
-        // 对话框名称
-        Label info_name = $("info_name", Label.class);
-        info_name.setText(talkName);
-    }
+
     @Override
-    public void addTalkMsgUserLeft(String talkId, String msg, Date msgData, Boolean idxFirst, Boolean selected, Boolean isRemind) {
+    public void addTalkMsgUserLeft(String talkId, String msg, Integer msgType, Date msgData, Boolean idxFirst, Boolean selected, Boolean isRemind) {
         ElementTalk talkElement = CacheUtil.talkMap.get(talkId);
         ListView<Pane> listView = talkElement.infoBoxList();
         TalkData talkUserData = (TalkData) listView.getUserData();
@@ -153,8 +132,8 @@ public class ChatController extends ChatInit implements IChatMethod{
     }
 
     @Override
-    public void addTalkMsgGroupLeft(String talkId, String userId, String userNickName, String userHead, String msg, Date msgDate, Boolean idxFirst, Boolean selected, Boolean isRemind) {
-// 自己的消息抛弃
+    public void addTalkMsgGroupLeft(String talkId, String userId, String userNickName, String userHead, String msg, Integer msgType, Date msgDate, Boolean idxFirst, Boolean selected, Boolean isRemind) {
+        // 自己的消息抛弃
         if (super.userId.equals(userId)) return;
         ElementTalk talkElement = CacheUtil.talkMap.get(talkId);
 
@@ -182,7 +161,7 @@ public class ChatController extends ChatInit implements IChatMethod{
     }
 
     @Override
-    public void addTalkMsgRight(String talkId, String msg, Date msgData, Boolean idxFirst, Boolean selected, Boolean isRemind) {
+    public void addTalkMsgRight(String talkId, String msg, Integer msgType, Date msgData, Boolean idxFirst, Boolean selected, Boolean isRemind) {
         ElementTalk talkElement = CacheUtil.talkMap.get(talkId);
         ListView<Pane> listView = talkElement.infoBoxList();
         Pane right = new ElementInfoBox().right(userNickName, userHead, msg);
@@ -194,6 +173,30 @@ public class ChatController extends ChatInit implements IChatMethod{
         // 设置位置&选中
         chatView.updateTalkListIdxAndSelected(0, talkElement.pane(), talkElement.msgRemind(), idxFirst, selected, isRemind);
     }
+
+    /**
+     * 私有方法
+     * 填充对话框消息内容
+     *
+     * @param talkElement 对话框元素
+     * @param talkName    对话框名称
+     */
+    private void fillInfoBox(ElementTalk talkElement, String talkName) {
+        String talkId = talkElement.pane().getUserData().toString();
+        // 填充对话列表
+        Pane info_pane_box = $("info_pane_box", Pane.class);
+        String boxUserId = (String) info_pane_box.getUserData();
+        // 判断是否已经填充[talkId]，当前已填充则返回
+        if (talkId.equals(boxUserId)) return;
+        ListView<Pane> listView = talkElement.infoBoxList();
+        info_pane_box.setUserData(talkId);
+        info_pane_box.getChildren().clear();
+        info_pane_box.getChildren().add(listView);
+        // 对话框名称
+        Label info_name = $("info_name", Label.class);
+        info_name.setText(talkName);
+    }
+
 
     @Override
     public void addFriendGroup(String groupId, String groupName, String groupHead) {

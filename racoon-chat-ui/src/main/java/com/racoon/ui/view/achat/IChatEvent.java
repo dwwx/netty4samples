@@ -20,7 +20,7 @@ public interface IChatEvent {
      * @param msg      发送消息内容
      * @param msgDate  发送消息时间
      */
-    void doSendMsg(String userId, String talkId, Integer talkType, String msg, Date msgDate);
+    void doSendMsg(String userId, String talkId, Integer talkType, String msg, Integer msgType, Date msgDate);
 
     /**
      * 事件处理；开启与好友发送消息 [点击发送消息时候触发 -> 添加到对话框、选中、展示对话列表]
