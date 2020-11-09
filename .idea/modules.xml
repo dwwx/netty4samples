@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/netty4rpc/netty4rpc.iml" filepath="$PROJECT_DIR$/netty4rpc/netty4rpc.iml" />
       <module fileurl="file://$PROJECT_DIR$/netty4tomcat/netty4tomcat.iml" filepath="$PROJECT_DIR$/netty4tomcat/netty4tomcat.iml" />
       <module fileurl="file://$PROJECT_DIR$/racoon-chat-client/racoon-chat-client.iml" filepath="$PROJECT_DIR$/racoon-chat-client/racoon-chat-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/racoon-chat-server/racoon-chat-server.iml" filepath="$PROJECT_DIR$/racoon-chat-server/racoon-chat-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/racoon-chat-server-aggreement/racoon-chat-server-aggreement.iml" filepath="$PROJECT_DIR$/racoon-chat-server-aggreement/racoon-chat-server-aggreement.iml" />
       <module fileurl="file://$PROJECT_DIR$/racoon-chat-ui/racoon-chat-ui.iml" filepath="$PROJECT_DIR$/racoon-chat-ui/racoon-chat-ui.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring2/spring2.iml" filepath="$PROJECT_DIR$/spring2/spring2.iml" />

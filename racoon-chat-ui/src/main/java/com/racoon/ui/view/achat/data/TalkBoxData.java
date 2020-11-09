@@ -1,8 +1,7 @@
 package com.racoon.ui.view.achat.data;
 
-import lombok.Data;
 
-@Data
+
 public class TalkBoxData {
     private String talkId;    // 对话Id
     private Integer talkType; // 对话类型
@@ -16,6 +15,38 @@ public class TalkBoxData {
         this.talkId = talkId;
         this.talkType = talkType;
         this.talkName = talkName;
+        this.talkHead = talkHead;
+    }
+
+    public String getTalkId() {
+        return talkId;
+    }
+
+    public void setTalkId(String talkId) {
+        this.talkId = talkId;
+    }
+
+    public Integer getTalkType() {
+        return talkType;
+    }
+
+    public void setTalkType(Integer talkType) {
+        this.talkType = talkType;
+    }
+
+    public String getTalkName() {
+        return talkName;
+    }
+
+    public void setTalkName(String talkName) {
+        this.talkName = talkName;
+    }
+
+    public String getTalkHead() {
+        return talkHead;
+    }
+
+    public void setTalkHead(String talkHead) {
         this.talkHead = talkHead;
     }
 }

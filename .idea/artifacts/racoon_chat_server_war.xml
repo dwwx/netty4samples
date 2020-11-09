@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="racoon-chat-server:war">
+    <output-path>$PROJECT_DIR$/racoon-chat-server/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>racoon-chat-server</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="racoon-chat-server.war">
+      <element id="artifact" artifact-name="racoon-chat-server:war exploded" />
+    </root>
+  </artifact>
+</component>
