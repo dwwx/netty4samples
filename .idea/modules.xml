@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/demo-agent-01/demo-agent-01.iml" filepath="$PROJECT_DIR$/demo-agent-01/demo-agent-01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/netty-chat/netty-chat.iml" filepath="$PROJECT_DIR$/netty-chat/netty-chat.iml" />
       <module fileurl="file://$PROJECT_DIR$/netty-learn-demo/netty-learn-demo.iml" filepath="$PROJECT_DIR$/netty-learn-demo/netty-learn-demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/netty-springboot-demo/netty-springboot-demo.iml" filepath="$PROJECT_DIR$/netty-springboot-demo/netty-springboot-demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/netty4rpc/netty4rpc.iml" filepath="$PROJECT_DIR$/netty4rpc/netty4rpc.iml" />
