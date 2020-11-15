@@ -12,7 +12,9 @@ import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpRequestDecoder;
 import io.netty.handler.codec.http.HttpRequestEncoder;
 
+import javax.annotation.Resource;
 import java.io.FileInputStream;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -26,6 +28,9 @@ public class GPTomcat {
     //加载properties文件进行初始化
     private void init(){
         try{
+            Class clazz = this.getClass();
+            URL u = clazz.getResource("/");
+            String path = u.getPath();
             String WEB_INF = this.getClass().getResource("/").getPath();
             FileInputStream fis = new FileInputStream(WEB_INF+"web.properties");
             webXml.load(fis);
@@ -34,6 +39,7 @@ public class GPTomcat {
                 if(key.endsWith(".url")){
                     String servletName = key.replaceAll("\\.url$","");
                     String url = webXml.getProperty(key);
+                    //得到的是某一个class的名字
                     String className = webXml.getProperty(servletName+".className");
                     GPServlet o = (GPServlet) Class.forName(className).newInstance();
                     servletMap.put(url,o);

@@ -20,6 +20,7 @@ import java.io.IOException;
  */
 
 public class Login extends Stage {
+    //加载fxml文件，然后准备加载
     private static final String RESOURCE_NAME = "/fxml/login/login.fxml";
 
     private Parent root;
@@ -31,10 +32,13 @@ public class Login extends Stage {
             e.printStackTrace();
         }
         Scene scene = new Scene(root);
+        //设置了透明的颜色
         scene.setFill(Color.TRANSPARENT);
         setScene(scene);
+        //样式也是透明的
         initStyle(StageStyle.TRANSPARENT);
         setResizable(false);
+        //设置任务状态栏的图标
         this.getIcons().add(new Image("/fxml/login/img/system/logo.png"));
 
         //初始化相关的事件
@@ -53,16 +57,21 @@ public class Login extends Stage {
     private double xOffset;
     private double yOffset;
     private void move(){
+        //root是我们登陆窗体的面板元素
         root.setOnMousePressed(event -> {
+            //按下鼠标时记录位置
             xOffset = getX() - event.getSceneX();
             yOffset = getY() - event.getSceneY();
+            //设置鼠标样式
             root.setCursor(Cursor.CLOSED_HAND);
         });
         root.setOnMouseDragged(event -> {
+            //拖动时设置位置
             setX(event.getSceneX() + xOffset);
             setY(event.getSceneY() + yOffset);
         });
         root.setOnMouseReleased(event -> {
+            //释放鼠标时，恢复鼠标的默认样式
             root.setCursor(Cursor.DEFAULT);
         });
     }
@@ -70,6 +79,7 @@ public class Login extends Stage {
         Button login_min = $("login_min", Button.class);
         login_min.setOnAction(event -> {
             System.out.println("最小化窗体");
+            //最小化
             setIconified(true);
         });
     }
@@ -86,9 +96,11 @@ public class Login extends Stage {
 
     //事件 登录
     private void login(){
+        //登陆验证时，不会使用明文传输，需要使用非对称加密，这是自己可以拓展的一部分
         TextField userId = $("userId", TextField.class);
         PasswordField userPassword = $("userPassword", PasswordField.class);
         Button login_button = $("login_button",Button.class);
+        //设置鼠标的点击事件
         login_button.setOnAction(event -> {
             System.out.println("登录操作");
             System.out.println("用户id:"+userId.getText());

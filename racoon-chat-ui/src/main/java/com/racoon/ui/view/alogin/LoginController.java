@@ -3,6 +3,9 @@ package com.racoon.ui.view.alogin;
 import com.racoon.ui.view.achat.IChatEvent;
 import com.racoon.ui.view.achat.IChatMethod;
 
+/**
+ * 窗体的控制管理类，也是一个窗体的管家，继承了窗体的初始化，实现了窗体具体的操作方法
+ */
 public class LoginController extends LoginInit implements ILoginMethod{
     private IChatMethod chat;
     private LoginView loginView;

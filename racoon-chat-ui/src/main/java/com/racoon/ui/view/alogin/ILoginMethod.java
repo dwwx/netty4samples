@@ -1,5 +1,8 @@
 package com.racoon.ui.view.alogin;
 
+/**
+ * 方法接口类，事件触发回调之后，进行页面的跳转和数据的填充
+ */
 public interface ILoginMethod {
     /**
      * 打开登陆窗口

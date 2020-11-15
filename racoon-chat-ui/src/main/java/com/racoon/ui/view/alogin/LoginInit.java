@@ -14,8 +14,14 @@ import java.io.IOException;
 
 /**
  * 初始化login页面的相关东西
+ * 加载这基本的对话框
+ * 组合这个对话框所 外部的相关实现方法
+ * 初始化加载root和相关的页面上需要使用的组件对象Buttor,Text。方便后续直接调用
+ *
+ * 继承了UIObject，可以调用父类的一些基本方法，和具体实现父类的抽象方法
  */
 public abstract class LoginInit extends UIObject {
+
     private static final String RESOURCE_NAME = "/fxml/login/login.fxml";
 
     protected ILoginEvent loginEvent;
@@ -43,6 +49,7 @@ public abstract class LoginInit extends UIObject {
         initView();
         initEventDefine();
     }
+
     private void obtain(){
         login_min = $("login_min", Button.class);
         login_close = $("login_close", Button.class);
@@ -50,4 +57,5 @@ public abstract class LoginInit extends UIObject {
         userId = $("userId", TextField.class);
         userPassword = $("userPassword", PasswordField.class);
     }
+
 }

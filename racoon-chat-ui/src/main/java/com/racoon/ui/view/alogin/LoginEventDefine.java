@@ -1,5 +1,9 @@
 package com.racoon.ui.view.alogin;
 
+/**
+ * 事件的定义，基本事件，最大化，最小化，退出
+ */
+
 public class LoginEventDefine {
     private LoginInit loginInit;
     private ILoginEvent loginEvent;

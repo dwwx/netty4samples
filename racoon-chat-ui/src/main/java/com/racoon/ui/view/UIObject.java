@@ -7,7 +7,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
- * 对页面的事件进行封装
+ * 对页面的事件进行封装，抽象类，提供基本的操作，方便自雷使用公共的方法
  */
 public abstract class UIObject extends Stage {
     protected Parent root;
