@@ -35,10 +35,15 @@ public class LoginHandler extends SimpleChannelInboundHandler<LoginResponse> {
             System.out.println("登陆失败");
             return;
         }
+        //平台的加载 异步加载？
         Platform.runLater(() -> {
+            //UIService封装了ILoginMethod 和 IChatMethod
+            //doLoginSuccess延迟到了LoginController中执行，就是关闭登录框，然后打开chat页面
+            //这里就调用chat.show()了
             uiService.getLogin().doLoginSuccess();
+
             IChatMethod chat = uiService.getChat();
-            // 设置用户信息
+            // 设置用户信息ChatController中是实现了IChatMethod的相关方法，调用UI所提供的接口进行页面的初始化加载
             chat.setUserInfo(msg.getUserId(), msg.getUserNickName(), msg.getUserHead());
             // 对话框
             List<ChatTalkDto> chatTalkList = msg.getChatTalkList();

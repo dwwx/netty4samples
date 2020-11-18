@@ -8,6 +8,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+//抽象类供其子类实现channelRead方法，因为其他方法都是一样的，可能每个Handler的ChannelRead方法的实现逻辑不一样
 public abstract class MyBizHandler<T> extends SimpleChannelInboundHandler<T> {
     protected Logger logger = LoggerFactory.getLogger(MyBizHandler.class);
     protected UserService userService;

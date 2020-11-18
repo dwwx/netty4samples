@@ -27,17 +27,26 @@ public class Application extends javafx.application.Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // 1. 启动窗口
+        //ChatEvent和LoginEvent分别实现了UI里面的IChatEvent和ILoginEvent
+        //在UI调用时进行多态加载
+        //ChatController是IChatMethod和ChatInit 构造时传入了ChatEvent()
         IChatMethod chat = new ChatController(new ChatEvent());
+
         ILoginMethod login = new LoginController(new LoginEvent(), chat);
+
         login.doShow();
 
+        //封装的UIService包装了ChatController和LoginController
         UIService uiService = new UIService();
         uiService.setChat(chat);
         uiService.setLogin(login);
         // 2. 启动socket连接
         logger.info("NettyClient连接服务开始 inetHost：{} inetPort：{}", "127.0.0.1", 7397);
+        // 启动nettyClient 再把uiService封装到NettyClient
+        // uiService会封装到每一个Handler中，在每一个Handler中对Chat和Login的UI接口进行操作
         NettyClient nettyClient = new NettyClient(uiService);
         Future<Channel> future = executorService.submit(nettyClient);
+
         Channel channel = future.get();
         if (null == channel) throw new RuntimeException("netty client start error channel is null");
 

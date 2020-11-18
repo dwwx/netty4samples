@@ -20,6 +20,10 @@ import java.util.List;
  * 公众号：bugstack虫洞栈 | 沉淀、分享、成长，让自己和他人都能有所收获！
  * create by 小傅哥 on @2020
  */
+
+/**
+ * 提供给外部接口访问，提供服务接口的
+ */
 @Controller
 public class InetController {
 

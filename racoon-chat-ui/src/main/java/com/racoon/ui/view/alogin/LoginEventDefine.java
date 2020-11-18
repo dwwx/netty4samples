@@ -34,6 +34,7 @@ public class LoginEventDefine {
             System.exit(0);
         });
     }
+
     public void doEventLogin(){
         //点击登陆按钮的时候，交给具体的业务逻辑的时候去处理
         loginInit.login_button.setOnAction(event -> {

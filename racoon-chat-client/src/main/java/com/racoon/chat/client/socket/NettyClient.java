@@ -36,8 +36,10 @@ public class NettyClient implements Callable<Channel> {
             b.group(workerGroup).channel(NioSocketChannel.class)
                     .option(ChannelOption.AUTO_READ, true)
                     .handler(new ClientChannelInitializer(uiService));
+            //开始的时候就进行连接
             channelFuture = b.connect(inetHost, inetPort).syncUninterruptibly();
             this.channel = channelFuture.channel();
+            //启动的时候添加到BeanUtil中，方便后续处理的时候进行提取，在程序中就可以随时获取到这个客户端的连接Channel
             BeanUtil.addBean("channel", channel);
         }catch (Exception e){
             logger.error("socket client start error", e.getMessage());

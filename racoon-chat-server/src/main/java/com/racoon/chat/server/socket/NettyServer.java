@@ -28,6 +28,7 @@ public class NettyServer implements Callable<Channel> {
 
     private Channel channel;
 
+    //这里面就是传的数据库的接口UserService,提供一个统一的接口调用
     public NettyServer(UserService userService){
         this.userService =userService;
     }

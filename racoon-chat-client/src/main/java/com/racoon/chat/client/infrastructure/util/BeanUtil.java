@@ -3,6 +3,7 @@ package com.racoon.chat.client.infrastructure.util;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+//对channel进行缓存
 public class BeanUtil {
     private static Map<String, Object> cacheMap = new ConcurrentHashMap<>();
 

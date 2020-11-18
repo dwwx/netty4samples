@@ -33,7 +33,7 @@ public class LoginHandler extends MyBizHandler<LoginRequest> {
     @Override
     public void channelRead(Channel channel, LoginRequest msg) {
         logger.info("登陆请求处理：{} ", JSON.toJSONString(msg));
-        // 1. 登陆失败返回false
+        // 1. 登陆失败返回false,userService方法进行数据库的账户密码验证
         boolean auth = userService.checkAuth(msg.getUserId(), msg.getUserPassword());
         if (!auth) {
             // 传输消息
@@ -42,12 +42,15 @@ public class LoginHandler extends MyBizHandler<LoginRequest> {
         }
         // 2. 登陆成功绑定Channel
         // 2.1 绑定用户ID
+        //SocketChannelUtil根据每一个userId进行channel的缓存
         SocketChannelUtil.addChannel(msg.getUserId(), channel);
-        // 2.2 绑定群组
+
+        // 2.2 绑定群组，将用户所属的群组与channel进行绑定，方便后续进行消息的群发
         List<String> groupsIdList = userService.queryUserGroupsIdList(msg.getUserId());
         for (String groupId : groupsIdList) {
             SocketChannelUtil.addChannelGroup(groupId, channel);
         }
+        //反馈消息，初始化这个用户的页面上的所有信息
         // 3. 反馈消息；用户信息、用户对话框列表、好友列表、群组列表
         // 组装消息包
         LoginResponse loginResponse = new LoginResponse();
@@ -55,6 +58,7 @@ public class LoginHandler extends MyBizHandler<LoginRequest> {
         UserInfo userInfo = userService.queryUserInfo(msg.getUserId());
         // 3.2 对话框
         List<TalkBoxInfo> talkBoxInfoList = userService.queryTalkBoxInfoList(msg.getUserId());
+
         for (TalkBoxInfo talkBoxInfo : talkBoxInfoList) {
             ChatTalkDto chatTalk = new ChatTalkDto();
             chatTalk.setTalkId(talkBoxInfo.getTalkId());
