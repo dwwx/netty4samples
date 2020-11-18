@@ -13,7 +13,11 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 import java.util.Date;
 
+/**
+ * 会话框的相关元素
+ */
 public class ElementTalk {
+    //主pane，每一个ElementTalk都有一个pane
     private Pane pane;       // 对话面板(与好友对话、与群组对话)
 
     private Label head;      // 头像区域
@@ -23,14 +27,33 @@ public class ElementTalk {
     private Label msgRemind; // 消息提醒
     private Button delete;   // 删除对话框按钮
 
+    //对象有一个 聊天的消息对话框
     private ListView<Pane> infoBoxList; // 初始化填充消息对话框
 
+    /**
+     * 动态装载pane
+     * @param talkId
+     * @param talkType
+     * @param talkName
+     * @param talkHead
+     * @param talkSketch
+     * @param talkDate
+     */
     public ElementTalk(String talkId, Integer talkType, String talkName, String talkHead, String talkSketch, Date talkDate) {
         pane = new Pane();
+
+        //设置pane的一些主要的属性，操作pane的一些库方法
         pane.setId(Ids.ElementTalkId.createTalkPaneId(talkId));
+        /**
+         * 对话id
+         * 对话类型
+         * 对话名称
+         * 对话头像
+         */
         pane.setUserData(new TalkBoxData(talkId, talkType, talkName, talkHead));
         pane.setPrefSize(270, 80);
         pane.getStyleClass().add("talkElement");
+
         ObservableList<Node> children = pane.getChildren();
 
         // 头像区域

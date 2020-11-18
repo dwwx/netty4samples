@@ -50,6 +50,7 @@
             </Pane>
             <!-- 会话栏 -->
             <Pane id="talk" layoutY="80" prefHeight="738" prefWidth="314">
+                <!-- 是一个List -->
                 <children>
                     <ListView id="talkList" prefHeight="738" prefWidth="314" styleClass="talkListStyle"/>
                 </children>

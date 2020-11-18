@@ -15,6 +15,7 @@ public class ElementInfoBox {
     private Label infoContentArrow; // 内容箭头
     private TextArea infoContent;   // 内容
 
+    //左侧消息 好友
     public Pane left(String userNickName, String userHead, String msg) {
 
         double autoHeight = AutoSizeTool.getHeight(msg);

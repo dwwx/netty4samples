@@ -6,6 +6,10 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+
+/**
+ * 群
+ */
 public class ElementFriendGroup {
 
     private Pane groupPane;

@@ -3,6 +3,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+//动态创建每一个pane
 public class ElementFriendUser {
     private Pane pane;    // 用户底板(存储用户ID)
 

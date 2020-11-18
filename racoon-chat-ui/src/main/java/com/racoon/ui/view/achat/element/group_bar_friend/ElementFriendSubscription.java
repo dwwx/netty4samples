@@ -10,6 +10,9 @@ import javafx.scene.text.TextAlignment;
 
 import javax.swing.text.html.ImageView;
 
+/**
+ * 公众号
+ */
 public class ElementFriendSubscription {
     private Pane pane;
 

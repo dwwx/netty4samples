@@ -3,6 +3,10 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
+
+/**
+ * 群列表
+ */
 public class ElementFriendGroupList {
     private Pane pane;
     private ListView<Pane> groupListView; // 群组列表

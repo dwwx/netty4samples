@@ -45,8 +45,13 @@ public abstract class LoginInit extends UIObject {
         initStyle(StageStyle.TRANSPARENT);
         setResizable(false);
         this.getIcons().add(new Image("/fxml/login/img/system/logo.png"));
+        //获取页面上的所有的元素
         obtain();
+        //这两个方法来自于UIObject,LoginInit没有实现,交给LoginInit的子类来实现
+        //在LoginController中实现了
+        //初始化页面
         initView();
+        //初始化页面定义
         initEventDefine();
     }
 

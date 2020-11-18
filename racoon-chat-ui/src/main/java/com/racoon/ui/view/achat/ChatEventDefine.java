@@ -1,6 +1,7 @@
 package com.racoon.ui.view.achat;
 
 import com.racoon.ui.view.achat.data.TalkBoxData;
+import com.racoon.ui.view.face.FaceController;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
@@ -24,6 +25,7 @@ public class ChatEventDefine {
         this.barFriend();
         doEventTextSend();
         doEventTouchSend();
+        doEventToolFace();
     }
     // 最小化
     private void min() {
@@ -47,6 +49,7 @@ public class ChatEventDefine {
         });
         Button button1 =chatInit.$("group_bar_friend_close", Button.class);
         button1.setOnAction(event -> {
+            //退出还有些异常
             chatEvent.doQuit();
             chatInit.close();
             System.exit(0);
@@ -73,8 +76,10 @@ public class ChatEventDefine {
 
     // 好友
     private void barFriend() {
+        //第一步，获取页面的元素
         Button bar_friend = chatInit.$("bar_friend", Button.class);
         Pane group_bar_friend = chatInit.$("group_bar_friend", Pane.class);
+        //获取元素之后设置相应的action
         bar_friend.setOnAction(event -> {
             switchBarChat(chatInit.$("bar_chat", Button.class), chatInit.$("group_bar_chat", Pane.class), false);
             switchBarFriend(bar_friend, group_bar_friend, true);
@@ -153,6 +158,7 @@ public class ChatEventDefine {
             doEventSendMsg();
         });
     }
+    //发送消息
     private void doEventSendMsg() {
         TextArea txt_input = chatInit.$("txt_input", TextArea.class);
         ListView listView = chatInit.$("talkList", ListView.class);
@@ -170,5 +176,13 @@ public class ChatEventDefine {
         // 发送事件给自己添加消息
         chatMethod.addTalkMsgRight(talkBoxData.getTalkId(), msg,0, msgDate, true, true, false);
         txt_input.clear();
+    }
+    //表情
+    private void doEventToolFace(){
+        FaceController face = new FaceController(chatInit, chatInit, chatEvent, chatMethod);
+        Button too_face = chatInit.$("tool_face", Button.class);
+        too_face.setOnMousePressed(event -> {
+            face.doShowFace(chatMethod.getToolFaceX(), chatMethod.getToolFaceX());
+        });
     }
 }

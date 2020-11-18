@@ -1,6 +1,8 @@
 package com.racoon.ui.view.achat.data;
 
-
+/**
+ * 每个对话框都有共有的属性，对话框分两种，群组对话框，个人对话框
+ */
 
 public class TalkBoxData {
     private String talkId;    // 对话Id

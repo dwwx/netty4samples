@@ -2,7 +2,12 @@ package com.racoon.ui.view.achat;
 
 import java.util.Date;
 
+/**
+ * 页面上的切换与数据填充，需要与后台进行交互的，主要是与后台进行交互
+ */
 public interface IChatMethod {
+    double getToolFaceX();
+    double getToolFaceY();
     /**
      * 打开窗口
      */

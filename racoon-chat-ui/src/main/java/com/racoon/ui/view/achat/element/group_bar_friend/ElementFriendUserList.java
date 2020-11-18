@@ -5,7 +5,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 
 public class ElementFriendUserList {
+    //一个pane有哪些信息,pane的属性信息
     private Pane pane;
+    //这里面的Pane是每一个好友的pane
     private ListView<Pane> userListView; // 好友列表
 
     public ElementFriendUserList(){

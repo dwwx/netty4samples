@@ -5,12 +5,16 @@ import com.racoon.ui.view.achat.data.TalkBoxData;
 import com.racoon.ui.view.achat.element.group_bar_friend.*;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 
+/**
+ * view就是页面的展示信息
+ */
 public class ChatView {
     private ChatInit chatInit;
     private IChatEvent chatEvent;
@@ -27,7 +31,18 @@ public class ChatView {
         addFriendGroupList();
         //4. 好友框体
         addFriendUserList();
+        //表情栏 不应该写在这里 杨改单独的抽象出来
+        //initFace();
     }
+    /**
+     * 测试表情的点击事件
+     */
+//    private void initFace(){
+//        Button face_button = chatInit.$("tool_face", Button.class);
+//        face_button.setOnAction(event -> {
+//            System.out.println("click face");
+//        });
+//    }
 
     /**
      * 好友列表添加工具方法‘新的朋友’
@@ -50,7 +65,8 @@ public class ChatView {
             chatInit.clearViewListSelectedAll(chatInit.$("userListView", ListView.class), chatInit.$("groupListView", ListView.class));
             ListView<Pane> listView = element.friendLuckListView();
             listView.getItems().clear();
-            chatEvent.addFriendLuck(chatInit.userId, listView);
+            //动态添加的过程
+            //chatEvent.addFriendLuck(chatInit.userId, listView);
         });
 
         // 搜索框事件
@@ -63,9 +79,14 @@ public class ChatView {
                 if (null == text) text = "";
                 if (text.length() > 30) text = text.substring(0, 30);
                 text = text.trim();
-                chatEvent.doFriendLuckSearch(chatInit.userId, text);
+                //动态添加的过程，先注释掉
+                //chatEvent.doFriendLuckSearch(chatInit.userId, text);
                 // 搜索清空元素
                 element.friendLuckListView().getItems().clear();
+                // 添加朋友
+                element.friendLuckListView().getItems().add(new ElementFriendLuckUser("1000005", "比丘卡", "05_50", 0).pane());
+                element.friendLuckListView().getItems().add(new ElementFriendLuckUser("1000006", "兰兰", "06_50", 1).pane());
+                element.friendLuckListView().getItems().add(new ElementFriendLuckUser("1000007", "Alexa", "07_50", 2).pane());
             }
         });
 
@@ -215,7 +236,9 @@ public class ChatView {
             return;
         }
         int count = remindCount.getCount() + 1;
+        //元素有setUserData和getUserData的方法
         msgRemindLabel.setUserData(new RemindCount(count));
+
         msgRemindLabel.setText(String.valueOf(count));
     }
     private void clearRemind(Label msgRemindLabel) {

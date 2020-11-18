@@ -35,7 +35,9 @@ public class LoginEventDefine {
         });
     }
     public void doEventLogin(){
+        //点击登陆按钮的时候，交给具体的业务逻辑的时候去处理
         loginInit.login_button.setOnAction(event -> {
+            //loginEvent是接口，这里调用的是其子类的实现方法
             loginEvent.doLoginCheck(loginInit.userId.getText(), loginInit.userPassword.getText());
         });
     }

@@ -6,6 +6,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+
+/**
+ * 新的朋友
+ */
 public class ElementFriendLuck {
     private Pane pane;
 

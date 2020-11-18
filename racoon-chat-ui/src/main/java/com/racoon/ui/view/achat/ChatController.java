@@ -36,10 +36,21 @@ public class ChatController extends ChatInit implements IChatMethod{
     }
 
     @Override
+    public double getToolFaceX() {
+        return getX() + getWidth() -960;
+    }
+
+    @Override
+    public double getToolFaceY() {
+        return getY() +getHeight()-180;
+    }
+
+    @Override
     public void doShow() {
         super.show();
     }
 
+    //设置客户端用户的基本信息
     @Override
     public void setUserInfo(String userId, String userNickName, String userHead) {
         super.userId = userId;
@@ -52,26 +63,37 @@ public class ChatController extends ChatInit implements IChatMethod{
     @Override
     public void addTalkBox(int talkIdx, Integer talkType, String talkId, String talkName, String talkHead, String talkSketch, Date talkDate, Boolean selected) {
         //填充到对话框
+        //得到会话的ListView
+        //会话栏
         ListView<Pane> talkList = $("talkList", ListView.class);
-        //判断该会话框是否有该对象
+        //判断该会话框是否有该对象 对每一个会话进行了一个缓存，talkId为key, ElementTalk为value
         ElementTalk elementTalk = CacheUtil.talkMap.get(talkId);
+
+        //如果已经存在
         if(null != elementTalk){
+            //根据talkId去找到对应的Node
             Node talkNode = talkList.lookup("#"+ Ids.ElementTalkId.createTalkPaneId(talkId));
+
+            //操作ListView的库函数
             if(talkNode == null){
                 talkList.getItems().add(talkIdx, elementTalk.pane());
             }
             if(selected){
+                //选中某一个pane
                 talkList.getSelectionModel().select(elementTalk.pane());
             }
             // 填充对话框消息栏
             fillInfoBox(elementTalk, talkName);
             return;
         }
+        // 如果不存在
         // 初始化对话框元素
         ElementTalk talkElement = new ElementTalk(talkId, talkType, talkName, talkHead, talkSketch, talkDate);
+        //加入缓存
         CacheUtil.talkMap.put(talkId, talkElement);
         // 填充到对话框
         ObservableList<Pane> items = talkList.getItems();
+        //talkElement.pane()得到相应的pane
         Pane talkElementPane = talkElement.pane();
         if (talkIdx >= 0) {
             items.add(talkIdx, talkElementPane);  // 添加到第一个位置
@@ -81,6 +103,7 @@ public class ChatController extends ChatInit implements IChatMethod{
         if (selected) {
             talkList.getSelectionModel().select(talkElementPane);
         }
+        //对话框的事件也在这里进行处理
         // 对话框元素点击事件
         talkElementPane.setOnMousePressed(event -> {
             System.out.println("点击对话框：" + talkName);
@@ -99,17 +122,21 @@ public class ChatController extends ChatInit implements IChatMethod{
         });
         //填充对话框消息栏
         fillInfoBox(talkElement, talkName);
-        // 从对话框中删除
+        // 从对话框中删除 点击删除按钮的时候
         talkElement.delete().setOnMouseClicked(event -> {
 
             System.out.println("删除对话框：" + talkName);
+
             talkList.getItems().remove(talkElementPane);
+
             Pane pane = $("info_pane_box", Pane.class);
             pane.getChildren().clear();
             pane.setUserData(null);
             Label label = $("info_name", Label.class);
             label.setText("");
+            //ListView<Pane>
             talkElement.infoBoxList().getItems().clear();
+            //清空消息
             talkElement.clearMsgSketch();
         });
     }
@@ -117,13 +144,17 @@ public class ChatController extends ChatInit implements IChatMethod{
     @Override
     public void addTalkMsgUserLeft(String talkId, String msg, Integer msgType, Date msgData, Boolean idxFirst, Boolean selected, Boolean isRemind) {
         ElementTalk talkElement = CacheUtil.talkMap.get(talkId);
+        //得到初始化没有数据的ListView<Pane>,其中有talkName talkHead
         ListView<Pane> listView = talkElement.infoBoxList();
+
         TalkData talkUserData = (TalkData) listView.getUserData();
+
         Pane left = new ElementInfoBox().left(talkUserData.getTalkName(), talkUserData.getTalkHead(), msg);
         // 消息填充
         listView.getItems().add(left);
         // 滚动条
         listView.scrollTo(left);
+
         talkElement.fillMsgSketch(msg, msgData);
         // 设置位置&选中
         chatView.updateTalkListIdxAndSelected(0, talkElement.pane(), talkElement.msgRemind(), idxFirst, selected, isRemind);
@@ -135,11 +166,14 @@ public class ChatController extends ChatInit implements IChatMethod{
     public void addTalkMsgGroupLeft(String talkId, String userId, String userNickName, String userHead, String msg, Integer msgType, Date msgDate, Boolean idxFirst, Boolean selected, Boolean isRemind) {
         // 自己的消息抛弃
         if (super.userId.equals(userId)) return;
+
         ElementTalk talkElement = CacheUtil.talkMap.get(talkId);
 
         if (null == talkElement) {
             Pane pane = $(Ids.ElementTalkId.createFriendGroupId(talkId), Pane.class);
+
             GroupsData groupsData = (GroupsData) pane.getUserData();
+
             if (null == groupsData) return;
             addTalkBox(0, 1, talkId, groupsData.getGroupName(), groupsData.getGroupHead(), userNickName + "：" + msg, msgDate, false);
             talkElement = CacheUtil.talkMap.get(talkId);
@@ -147,7 +181,9 @@ public class ChatController extends ChatInit implements IChatMethod{
             System.out.println("事件通知(开启与群组发送消息)");
         }
         ListView<Pane> listView = talkElement.infoBoxList();
+
         TalkData talkData = (TalkData) listView.getUserData();
+
         Pane left = new ElementInfoBox().left(userNickName, userHead, msg);
         // 消息填充
         listView.getItems().add(left);
