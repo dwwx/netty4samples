@@ -18,6 +18,9 @@ import com.racoon.chat.protocol.talk.TalkNoticeResponse;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * 对传输对象的command和对应的类进行缓存
+ */
 public abstract class Packet {
     private final static Map<Byte, Class<? extends Packet>> packetType = new ConcurrentHashMap<>();
 

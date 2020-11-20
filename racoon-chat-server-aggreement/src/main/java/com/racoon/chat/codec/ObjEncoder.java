@@ -10,9 +10,13 @@ public class ObjEncoder extends MessageToByteEncoder<Packet> {
 
     @Override
     protected void encode(ChannelHandlerContext ctx, Packet msg, ByteBuf out) throws Exception {
+        //对象转换为字节数组
         byte[] data = SerializationUtil.serialize(msg);
+        //先写一个长度
         out.writeInt(data.length+1);
+        //再写一个command
         out.writeByte(msg.getCommand());
+        //再写数据
         out.writeBytes(data);
     }
 }

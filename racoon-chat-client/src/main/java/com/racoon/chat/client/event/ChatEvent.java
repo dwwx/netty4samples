@@ -16,6 +16,9 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 
+/**
+ * ChatEvent实现了UI中提供的接口IChatEvent,用于给服务端发送消息
+ */
 public class ChatEvent implements IChatEvent {
     private Logger logger = LoggerFactory.getLogger(ChatEvent.class);
 
@@ -39,31 +42,32 @@ public class ChatEvent implements IChatEvent {
         }
     }
 
-
+    //添加User对话框
     @Override
     public void doEventAddTalkUser(String userId, String userFriendId) {
         Channel channel = BeanUtil.getBean("channel", Channel.class);
         channel.writeAndFlush(new TalkNoticeRequest(userId, userFriendId, 0));
     }
-
+    //添加群对话框
     @Override
     public void doEventAddTalkGroup(String userId, String groupId) {
         Channel channel = BeanUtil.getBean("channel", Channel.class);
         channel.writeAndFlush(new TalkNoticeRequest(userId, groupId, 1));
     }
-
+    //删除对话框
     @Override
     public void doEventDelTalkUser(String userId, String talkId) {
         Channel channel = BeanUtil.getBean("channel", Channel.class);
         channel.writeAndFlush(new DelTalkRequest(userId, talkId));
     }
 
+    //添加好友
     @Override
     public void addFriendLuck(String userId, ListView<Pane> listView) {
         Channel channel = BeanUtil.getBean("channel", Channel.class);
         channel.writeAndFlush(new SearchFriendRequest(userId, ""));
     }
-
+    //搜索好友
     @Override
     public void doFriendLuckSearch(String userId, String text) {
         Channel channel = BeanUtil.getBean("channel", Channel.class);

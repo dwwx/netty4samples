@@ -8,9 +8,6 @@ import io.netty.channel.Channel;
 import javafx.application.Platform;
 
 /**
- * 博  客：http://bugstack.cn
- * 公众号：bugstack虫洞栈 | 沉淀、分享、成长，让自己和他人都能有所收获！
- * create by 小傅哥 on @2020
  *
  * 添加好友
  */
@@ -22,10 +19,10 @@ public class AddFriendHandler extends MyBizHandler<AddFriendResponse> {
 
     @Override
     public void channelRead(Channel channel, AddFriendResponse msg) {
+        //是ChatController实现了IChatMethod
         IChatMethod chat = uiService.getChat();
         Platform.runLater(() -> {
             chat.addFriendUser(true, msg.getFriendId(), msg.getFriendNickName(), msg.getFriendHead());
         });
     }
-
 }

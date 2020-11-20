@@ -21,6 +21,7 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private IUserRepository userRepository;
+
     @Resource
     private ThreadPoolTaskExecutor taskExecutor;
 
@@ -70,6 +71,7 @@ public class UserServiceImpl implements UserService {
         userRepository.addUserFriend(userFriendList);
     }
 
+    //ThreadPoolTaskExecutor进行execute执行异步写库
     @Override
     public void asyncAppendChatRecord(final ChatRecordInfo chatRecordInfo) {
         taskExecutor.execute(new Runnable() {

@@ -1,5 +1,8 @@
 package com.racoon.chat.protocol;
 
+/**
+ * 定义一些协议传输对象的识别
+ */
 public interface Command {
     Byte LoginRequest = 1;
     Byte LoginResponse = 2;

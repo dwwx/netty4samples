@@ -23,12 +23,21 @@ public class SearchFriendHandler extends SimpleChannelInboundHandler<SearchFrien
         this.uiService = uiService;
     }
 
+    /**
+     * 得到服务器的消息反馈
+     * @param ctx
+     * @param msg
+     * @throws Exception
+     */
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, SearchFriendResponse msg) throws Exception {
         List<UserDto> list = msg.getList();
         if (null == list || list.isEmpty()) return;
         IChatMethod chat = uiService.getChat();
         Platform.runLater(() -> {
+            /**
+             * 填充到UI页面
+             */
             for (UserDto user : list) {
                 chat.addLuckFriend(user.getUserId(), user.getUserNickName(), user.getUserHead(), user.getStatus());
             }

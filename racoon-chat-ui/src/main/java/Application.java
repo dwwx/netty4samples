@@ -10,6 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.util.Date;
+import java.util.Properties;
 
 /**
  * 窗口 Stage
@@ -44,6 +45,7 @@ public class Application extends javafx.application.Application {
                 System.out.println("talkType[0好友/1群组]：" + talkType);
                 System.out.println("talkId：" + talkId);
                 System.out.println("msg：" + msg);
+
             }
 
 
@@ -118,6 +120,9 @@ public class Application extends javafx.application.Application {
     }
 
     public static void main(String[] args) {
+        Properties pro=System.getProperties();
+        System.out.println(pro.getProperty("file.encoding"));
+        System.out.println("按时肯定会");
         launch(args);
     }
 }

@@ -23,6 +23,8 @@ public abstract class ChatInit extends UIObject {
     public TextArea txt_input; //输入框
 
     ChatInit(IChatEvent chatEvent){
+        //忘记给chatEvent赋值了
+        this.chatEvent = chatEvent;
         try{
             root = FXMLLoader.load(getClass().getResource(RESOURCE_NAME));
         }catch (IOException e){

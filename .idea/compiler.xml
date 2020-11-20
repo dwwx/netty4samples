@@ -8,8 +8,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="netty-springboot-demo" />
         <module name="netty-learn-demo" />
-        <module name="netty-chat" />
         <module name="racoon-chat-server" />
+        <module name="netty-chat" />
         <module name="demo-agent-01" />
         <module name="netty4rpc" />
         <module name="racoon-chat-ui" />

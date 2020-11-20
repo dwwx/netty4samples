@@ -48,6 +48,7 @@ public class LoginHandler extends MyBizHandler<LoginRequest> {
         // 2.2 绑定群组，将用户所属的群组与channel进行绑定，方便后续进行消息的群发
         List<String> groupsIdList = userService.queryUserGroupsIdList(msg.getUserId());
         for (String groupId : groupsIdList) {
+            //缓存群组的channel
             SocketChannelUtil.addChannelGroup(groupId, channel);
         }
         //反馈消息，初始化这个用户的页面上的所有信息
@@ -60,29 +61,39 @@ public class LoginHandler extends MyBizHandler<LoginRequest> {
         List<TalkBoxInfo> talkBoxInfoList = userService.queryTalkBoxInfoList(msg.getUserId());
 
         for (TalkBoxInfo talkBoxInfo : talkBoxInfoList) {
+
             ChatTalkDto chatTalk = new ChatTalkDto();
+
             chatTalk.setTalkId(talkBoxInfo.getTalkId());
             chatTalk.setTalkType(talkBoxInfo.getTalkType());
             chatTalk.setTalkName(talkBoxInfo.getTalkName());
             chatTalk.setTalkHead(talkBoxInfo.getTalkHead());
             chatTalk.setTalkSketch(talkBoxInfo.getTalkSketch());
             chatTalk.setTalkDate(talkBoxInfo.getTalkDate());
+
             loginResponse.getChatTalkList().add(chatTalk);
 
             // 好友；聊天消息
             if (Constants.TalkType.Friend.getCode().equals(talkBoxInfo.getTalkType())) {
+                //传输协议的类 需要把查询的数据封装到协议的类
                 List<ChatRecordDto> chatRecordDtoList = new ArrayList<>();
+                //查询数据库
                 List<ChatRecordInfo> chatRecordInfoList = userService.queryChatRecordInfoList(talkBoxInfo.getTalkId(), msg.getUserId(), Constants.TalkType.Friend.getCode());
+
                 for (ChatRecordInfo chatRecordInfo : chatRecordInfoList) {
+
                     ChatRecordDto chatRecordDto = new ChatRecordDto();
                     chatRecordDto.setTalkId(talkBoxInfo.getTalkId());
+                    //msg.getUserId()是登陆人的id
+                    //登陆人的id和chatRecordInfo.getUserID()(与记录的UserId相等)
                     boolean msgType = msg.getUserId().equals(chatRecordInfo.getUserId());
-                    // 自己发的消息
+                    //
+                    // 相等 自己发的消息
                     if (msgType) {
                         chatRecordDto.setUserId(chatRecordInfo.getUserId());
                         chatRecordDto.setMsgUserType(0); // 消息类型[0自己/1好友]
                     }
-                    // 好友发的消息
+                    // 不相等 好友发的消息
                     else {
                         chatRecordDto.setUserId(chatRecordInfo.getFriendId());
                         chatRecordDto.setMsgUserType(1); // 消息类型[0自己/1好友]

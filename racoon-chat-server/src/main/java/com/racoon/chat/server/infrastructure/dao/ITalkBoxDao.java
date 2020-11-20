@@ -2,6 +2,7 @@ package com.racoon.chat.server.infrastructure.dao;
 
 import com.racoon.chat.server.infrastructure.po.TalkBox;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 
 import java.util.List;
@@ -20,7 +21,7 @@ public interface ITalkBoxDao {
 
     void deleteUserTalk(String userId, String talkId);
 
-    TalkBox queryTalkBox(String userId, String talkId);
+    TalkBox queryTalkBox(@Param("userId") String userId, @Param("talkId")String talkId);
 
     List<String> queryTalkBoxGroupsIdList(String userId);
 

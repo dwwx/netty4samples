@@ -8,6 +8,9 @@ import io.netty.handler.codec.ByteToMessageDecoder;
 
 import java.util.List;
 
+/**
+ * 定义自己的Decoder方法
+ */
 public class ObjDecoder extends ByteToMessageDecoder {
 
     @Override

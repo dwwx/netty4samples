@@ -48,50 +48,47 @@ public class LoginHandler extends SimpleChannelInboundHandler<LoginResponse> {
             // 对话框
             List<ChatTalkDto> chatTalkList = msg.getChatTalkList();
             if (null != chatTalkList) {
-                chatTalkList.forEach(talk -> {
-                            chat.addTalkBox(0, talk.getTalkType(), talk.getTalkId(), talk.getTalkName(), talk.getTalkHead(), talk.getTalkSketch(), talk.getTalkDate(), true);
-                            switch (talk.getTalkType()) {
-                                // 好友
-                                case 0:
-                                    List<ChatRecordDto> userRecordList = talk.getChatRecordList();
-                                    if (null == userRecordList || userRecordList.isEmpty()) return;
-                                    for (int i = userRecordList.size() - 1; i >= 0; i--) {
-                                        ChatRecordDto chatRecord = userRecordList.get(i);
-                                        //  自己的消息
-                                        if (0 == chatRecord.getMsgType()) {
-                                            chat.addTalkMsgRight(chatRecord.getTalkId(), chatRecord.getMsgContent(), chatRecord.getMsgType(), chatRecord.getMsgDate(), true, false, false);
-                                            continue;
-                                        }
-                                        // 好友的消息
-                                        if (1 == chatRecord.getMsgType()) {
-                                            chat.addTalkMsgUserLeft(chatRecord.getTalkId(), chatRecord.getMsgContent(), chatRecord.getMsgType(), chatRecord.getMsgDate(), true, false, false);
-                                        }
-                                    }
-                                    break;
-                                // 群组
-                                case 1:
-                                    List<ChatRecordDto> groupRecordList = talk.getChatRecordList();
-                                    if (null == groupRecordList || groupRecordList.isEmpty()) return;
-                                    for (int i = groupRecordList.size() - 1; i >= 0; i--) {
-                                        ChatRecordDto chatRecord = groupRecordList.get(i);
-                                        //  自己的消息
-                                        if (0 == chatRecord.getMsgUserType()) {
-                                            chat.addTalkMsgRight(chatRecord.getTalkId(), chatRecord.getMsgContent(), chatRecord.getMsgType(), chatRecord.getMsgDate(), true, false, false);
-                                            continue;
-                                        }
-                                        // 他人的消息
-                                        if (1 == chatRecord.getMsgUserType()) {
-                                            chat.addTalkMsgGroupLeft(chatRecord.getTalkId(), chatRecord.getUserId(), chatRecord.getUserNickName(), chatRecord.getUserHead(), chatRecord.getMsgContent(), chatRecord.getMsgType(), chatRecord.getMsgDate(), true, false, false);
-                                        }
-                                    }
-                                    break;
-                                default:
-                                    break;
+                for(ChatTalkDto talk: chatTalkList){
+                    chat.addTalkBox(0, talk.getTalkType(), talk.getTalkId(), talk.getTalkName(), talk.getTalkHead(), talk.getTalkSketch(), talk.getTalkDate(), true);
+                    switch (talk.getTalkType()) {
+                        // 好友
+                        case 0:
+                            List<ChatRecordDto> userRecordList = talk.getChatRecordList();
+                            if (null == userRecordList || userRecordList.isEmpty()) return;
+                            for (int i = userRecordList.size() - 1; i >= 0; i--) {
+                                ChatRecordDto chatRecord = userRecordList.get(i);
+                                //  自己的消息
+                                if (0 == chatRecord.getMsgUserType()) {
+                                    chat.addTalkMsgRight(chatRecord.getTalkId(), chatRecord.getMsgContent(), chatRecord.getMsgType(), chatRecord.getMsgDate(), true, false, false);
+                                    continue;
+                                }
+                                // 好友的消息
+                                if (1 == chatRecord.getMsgUserType()) {
+                                    chat.addTalkMsgUserLeft(chatRecord.getTalkId(), chatRecord.getMsgContent(), chatRecord.getMsgType(), chatRecord.getMsgDate(), true, false, false);
+                                }
                             }
-
-                        }
-                );
-
+                            break;
+                        // 群组
+                        case 1:
+                            List<ChatRecordDto> groupRecordList = talk.getChatRecordList();
+                            if (null == groupRecordList || groupRecordList.isEmpty()) return;
+                            for (int i = groupRecordList.size() - 1; i >= 0; i--) {
+                                ChatRecordDto chatRecord = groupRecordList.get(i);
+                                //  自己的消息
+                                if (0 == chatRecord.getMsgUserType()) {
+                                    chat.addTalkMsgRight(chatRecord.getTalkId(), chatRecord.getMsgContent(), chatRecord.getMsgType(), chatRecord.getMsgDate(), true, false, false);
+                                    continue;
+                                }
+                                // 他人的消息
+                                if (1 == chatRecord.getMsgUserType()) {
+                                    chat.addTalkMsgGroupLeft(chatRecord.getTalkId(), chatRecord.getUserId(), chatRecord.getUserNickName(), chatRecord.getUserHead(), chatRecord.getMsgContent(), chatRecord.getMsgType(), chatRecord.getMsgDate(), true, false, false);
+                                }
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
             // 群组
             List<GroupsDto> groupsList = msg.getGroupsList();

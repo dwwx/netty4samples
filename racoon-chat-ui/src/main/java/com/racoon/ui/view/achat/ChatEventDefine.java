@@ -171,12 +171,14 @@ public class ChatEventDefine {
             return;
         }
         Date msgDate = new Date();
-        // 发送消息
+        // 发送消息 这里需要调用chatEvent来发送消息才行
+        chatEvent.doSendMsg(chatInit.userId, talkBoxData.getTalkId(), talkBoxData.getTalkType(), msg, 0, msgDate);
         System.out.println("发送消息：" + msg);
         // 发送事件给自己添加消息
         chatMethod.addTalkMsgRight(talkBoxData.getTalkId(), msg,0, msgDate, true, true, false);
         txt_input.clear();
     }
+
     //表情
     private void doEventToolFace(){
         FaceController face = new FaceController(chatInit, chatInit, chatEvent, chatMethod);

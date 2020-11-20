@@ -27,5 +27,6 @@ public abstract class MyBizHandler<T> extends SimpleChannelInboundHandler<T> {
         System.out.println("关闭" + ctx.channel().id());
     }
 
+    //进行多态的调用
     public abstract void channelRead(Channel channel, T msg);
 }

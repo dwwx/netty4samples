@@ -50,21 +50,27 @@ public class UserRepository implements IUserRepository {
     @Override
     public List<TalkBoxInfo> queryTalkBoxInfoList(String userId) {
         List<TalkBoxInfo> talkBoxInfoList = new ArrayList<>();
+
         List<TalkBox> talkBoxList = talkBoxDao.queryTalkBoxList(userId);
+
         for (TalkBox talkBox : talkBoxList) {
             TalkBoxInfo talkBoxInfo = new TalkBoxInfo();
             if (Friend.getCode().equals(talkBox.getTalkType())) {
+
                 User user = userDao.queryUserById(talkBox.getTalkId());
                 talkBoxInfo.setTalkType(Friend.getCode());
                 talkBoxInfo.setTalkId(user.getUserId());
                 talkBoxInfo.setTalkName(user.getUserNickName());
                 talkBoxInfo.setTalkHead(user.getUserHead());
+
             } else if (Group.getCode().equals(talkBox.getTalkType())) {
+
                 Groups groups = groupsDao.queryGroupsById(talkBox.getTalkId());
                 talkBoxInfo.setTalkType(Group.getCode());
                 talkBoxInfo.setTalkId(groups.getGroupId());
                 talkBoxInfo.setTalkName(groups.getGroupName());
                 talkBoxInfo.setTalkHead(groups.getGroupHead());
+
             }
             talkBoxInfoList.add(talkBoxInfo);
         }
@@ -75,11 +81,13 @@ public class UserRepository implements IUserRepository {
     public void addTalkBoxInfo(String userId, String talkId, Integer talkType) {
         try {
             if (null != talkBoxDao.queryTalkBox(userId, talkId)) return;
+
             TalkBox talkBox = new TalkBox();
             talkBox.setUserId(userId);
             talkBox.setTalkId(talkId);
             talkBox.setTalkType(talkType);
             talkBoxDao.addTalkBox(talkBox);
+
         } catch (DuplicateKeyException ignored) {
         }
     }
@@ -152,10 +160,20 @@ public class UserRepository implements IUserRepository {
         chatRecordDao.appendChatRecord(chatRecord);
     }
 
+    /**
+     *
+     * @param talkId   对话框ID
+     * @param userId   好友ID
+     * @param talkType 对话框类型；0好友、1群组
+     * @return
+     */
     @Override
     public List<ChatRecordInfo> queryChatRecordInfoList(String talkId, String userId, Integer talkType) {
+
         List<ChatRecordInfo> chatRecordInfoList = new ArrayList<>();
+
         List<ChatRecord> list = new ArrayList<>();
+
         if (Friend.getCode().equals(talkType)){
             try{
                 list = chatRecordDao.queryUserChatRecordList(talkId, userId);
@@ -167,6 +185,7 @@ public class UserRepository implements IUserRepository {
         } else if (Group.getCode().equals(talkType)){
             list =  chatRecordDao.queryGroupsChatRecordList(talkId, userId);
         }
+
         for (ChatRecord chatRecord : list) {
             ChatRecordInfo chatRecordInfo = new ChatRecordInfo();
             chatRecordInfo.setUserId(chatRecord.getUserId());
@@ -176,6 +195,7 @@ public class UserRepository implements IUserRepository {
             chatRecordInfo.setMsgDate(chatRecord.getMsgDate());
             chatRecordInfoList.add(chatRecordInfo);
         }
+
         return chatRecordInfoList;
     }
 
